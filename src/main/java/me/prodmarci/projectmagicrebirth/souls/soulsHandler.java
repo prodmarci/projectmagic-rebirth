@@ -116,10 +116,13 @@ public class soulsHandler implements Listener {
         // Create a timed runnable executing every 40 ticks
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(mainClass, new Runnable() {
             public void run() {
+
                 // If player is on the soulsCount list
                 if(soulsCount.containsKey(playerUUID)) {
+
                     // Converts int to percentage.
                     float barCompletion = (float) soulsCount.get(playerUUID) / 100;
+
                     // Display player soulsCount as XP Level
                     player.setLevel(soulsCount.get(playerUUID));
 

@@ -16,14 +16,17 @@ public final class main extends JavaPlugin implements Listener {
         soulsHandler = new soulsHandler(this);
     }
 
+    // -> Souls count classes
+
+    // Used when joining, adds player with certain UUID to HashMap
     public void initSoulsCount(String UUID,Integer soulsAmount) {
         soulsCount.put(UUID, soulsAmount);
     }
-
+    // Used when leaving, removes player with certain UUID from HashMap
     public void delSoulsCount(String UUID,Integer soulsAmount) {
         soulsCount.remove(UUID, soulsAmount);
     }
-
+    // Used to change certain value assigned to player with certain UUID in HashMap
     public void changeSoulsCount(String UUID,Integer soulsAmount) {
         soulsCount.replace(UUID, soulsAmount);
     }
