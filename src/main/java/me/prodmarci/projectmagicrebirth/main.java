@@ -1,6 +1,6 @@
 package me.prodmarci.projectmagicrebirth;
 
-import me.prodmarci.projectmagicrebirth.souls.soulsBar;
+import me.prodmarci.projectmagicrebirth.souls.soulsHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,11 +9,11 @@ import java.util.HashMap;
 
 public final class main extends JavaPlugin implements Listener {
 
-    soulsBar soulsBar;
+    soulsHandler soulsHandler;
     public HashMap<String, Integer> soulsCount = new HashMap<String, Integer>();
 
     public main() {
-        soulsBar = new soulsBar(this);
+        soulsHandler = new soulsHandler(this);
     }
 
     public void initSoulsCount(String UUID,Integer soulsAmount) {
@@ -31,6 +31,6 @@ public final class main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
-        Bukkit.getServer().getPluginManager().registerEvents(new soulsBar(this), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new soulsHandler(this), this);
     }
 }

@@ -13,12 +13,12 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
 
-public class soulsBar implements Listener {
+public class soulsHandler implements Listener {
     main mainClass;
     public HashMap<String, Integer> soulsCount;
 
     // Allows accessing variables from main class
-    public soulsBar(main m) {
+    public soulsHandler(main m) {
         this.mainClass = m;
         this.soulsCount = m.soulsCount;
     }
@@ -63,6 +63,20 @@ public class soulsBar implements Listener {
 
             // Depending on entity killed by player add souls
             switch (entityType) {
+                case CREEPER: {
+                    // Sets amount of souls player will get when killing entity above ^^^
+                    int soulsForKill = 20;
+
+                    // If playerSoulsCount after a kill will be bigger than maxSouls sets player soulsCount to maxSouls
+                    if (playerSoulsCount + soulsForKill > maxSouls) {
+                        soulsForKill = maxSouls - playerSoulsCount;
+                    }
+
+                    //Replaces old soulCount value with new soulCount value
+                    mainClass.changeSoulsCount(playerUUID, playerSoulsCount + soulsForKill);
+                    break;
+                }
+                case SKELETON:
                 case ZOMBIE: {
                     // Sets amount of souls player will get when killing entity above ^^^
                     int soulsForKill = 10;
@@ -76,9 +90,9 @@ public class soulsBar implements Listener {
                     mainClass.changeSoulsCount(playerUUID, playerSoulsCount + soulsForKill);
                     break;
                 }
-                case SKELETON: {
+                case SPIDER: {
                     // Sets amount of souls player will get when killing entity above ^^^
-                    int soulsForKill = 20;
+                    int soulsForKill = 5;
 
                     // If playerSoulsCount after a kill will be bigger than maxSouls sets player soulsCount to maxSouls
                     if (playerSoulsCount + soulsForKill > maxSouls) {
