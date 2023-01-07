@@ -37,17 +37,16 @@ public class spellbookHandler implements Listener {
         if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().equals(spellbookDisplayName)
                 && player.getInventory().getItemInMainHand().containsEnchantment(Enchantment.LOYALTY)) {
 
-            // Get spellbook content on 1'st page
+            // Get 1 st page spellbookContent
             String spellbookContent = bookMeta.getPage(1);
 
-            // Depending on spellbookContent equip spells
             switch (spellbookContent) {
                 case "COF": {
-                    player.sendMessage("COF equipped");
+                    player.sendMessage("COF");
                     break;
                 }
                 case "ICEC": {
-                    player.sendMessage("ICEC equipped");
+                    player.sendMessage("ICEC");
                     break;
                 }
             }
