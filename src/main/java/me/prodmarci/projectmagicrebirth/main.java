@@ -14,6 +14,7 @@ public final class main extends JavaPlugin implements Listener {
     public HashMap<String, Integer> soulsCount = new HashMap<String, Integer>();
 
     spellbookHandler spellbookHandler;
+    public HashMap<String, String> spellSelected = new HashMap<String, String>();
 
     public main() {
         soulsHandler = new soulsHandler(this);

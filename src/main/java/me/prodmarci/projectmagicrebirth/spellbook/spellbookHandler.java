@@ -15,10 +15,13 @@ public class spellbookHandler implements Listener {
     main mainClass;
     public HashMap<String, Integer> soulsCount;
 
+    public HashMap<String, String> spellSelected = new HashMap<String, String>();
+
     // Allows accessing variables from main class
     public spellbookHandler(main m) {
         this.mainClass = m;
         this.soulsCount = m.soulsCount;
+        this.spellSelected = m.spellSelected;
     }
 
     // Checks book for spells written then equips them if player had enough mana
@@ -33,21 +36,25 @@ public class spellbookHandler implements Listener {
         // Sets required spellbook name
         String spellbookDisplayName = "Bond of Blood";
 
-        // Checks if player's book is named the same as spellbookDisplayName variable and if the spellbook has loyalty enchantment when opening
-        if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().equals(spellbookDisplayName)
-                && player.getInventory().getItemInMainHand().containsEnchantment(Enchantment.LOYALTY)) {
+        // If spell is not chosen lets player choose spell
+        if (!spellSelected.containsKey(playerUUID)) {
 
-            // Get 1 st page spellbookContent
-            String spellbookContent = bookMeta.getPage(1);
+            // Checks if player's book is named the same as spellbookDisplayName variable and if the spellbook has loyalty enchantment when opening
+            if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().equals(spellbookDisplayName)
+                    && player.getInventory().getItemInMainHand().containsEnchantment(Enchantment.LOYALTY)) {
 
-            switch (spellbookContent) {
-                case "COF": {
-                    player.sendMessage("COF");
-                    break;
-                }
-                case "ICEC": {
-                    player.sendMessage("ICEC");
-                    break;
+                // Get 1 st page spellbookContent
+                String spellbookContent = bookMeta.getPage(1);
+
+                switch (spellbookContent) {
+                    case "COF": {
+                        // TODO: ADD CHOOSING SPELL HERE
+                        break;
+                    }
+                    case "ICEC": {
+                        // TODO: ADD CHOOSING SPELL HERE v2
+                        break;
+                    }
                 }
             }
         }
