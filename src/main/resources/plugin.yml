@@ -1,0 +1,4 @@
+name: projectmagic-rebirth
+version: '${project.version}'
+main: me.prodmarci.projectmagicrebirth.main
+api-version: 1.19
