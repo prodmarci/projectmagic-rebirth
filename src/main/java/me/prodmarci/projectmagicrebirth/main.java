@@ -20,6 +20,10 @@ public final class main extends JavaPlugin implements Listener {
         soulsCount.put(UUID, soulsAmount);
     }
 
+    public void delSoulsCount(String UUID,Integer soulsAmount) {
+        soulsCount.remove(UUID, soulsAmount);
+    }
+
     public void changeSoulsCount(String UUID,Integer soulsAmount) {
         soulsCount.replace(UUID, soulsAmount);
     }

@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
 
@@ -33,6 +34,18 @@ public class soulsBar implements Listener {
 
         if (!soulsCount.containsKey(playerUUID)) {
             mainClass.initSoulsCount(playerUUID, 0);
+        }
+    }
+
+    // Removes player from soulsCount HashMap when player quits
+    @EventHandler
+    public void delSoulsOnQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        String playerUUID = player.getUniqueId().toString();
+
+        if (soulsCount.containsKey(playerUUID)) {
+            Integer soulsAmount = soulsCount.get(playerUUID);
+            mainClass.delSoulsCount(playerUUID, soulsAmount);
         }
     }
 
@@ -85,19 +98,22 @@ public class soulsBar implements Listener {
     public void soulsDisplayAtXPBar(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         String playerUUID = player.getUniqueId().toString();
-        Integer playerSoulsCount = soulsCount.get(playerUUID);
+        Integer playerSoulsCount = (int) soulsCount.get(playerUUID);
 
-        // If player is on the soulsCount list
-        if(soulsCount.containsKey(playerUUID)) {
+        // Create a timed runnable executing every 40 ticks
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(mainClass, new Runnable() {
+            public void run() {
+                // If player is on the soulsCount list
+                if(soulsCount.containsKey(playerUUID)) {
+                    // Converts int to percentage.
+                    float barCompletion = (float) soulsCount.get(playerUUID) / 100;
+                    // Display player soulsCount as XP Level
+                    player.setLevel((int) soulsCount.get(playerUUID));
 
-            // Create a timed runnable executing every 40 ticks
-            Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(mainClass, () -> {
-                // Display player soulsCount as XP Level
-                player.setLevel(playerSoulsCount);
-
-                // Display player soulsCount on XP Bar
-                player.setExp((float) playerSoulsCount / 100);
-            },0, 40);
-        }
+                    // Display player soulsCount as percentage on XP Bar
+                    player.setExp(barCompletion);
+                }
+            }
+        },0, 40);
     }
 }
