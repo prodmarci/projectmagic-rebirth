@@ -1,6 +1,7 @@
 package me.prodmarci.projectmagicrebirth;
 
 import me.prodmarci.projectmagicrebirth.souls.soulsHandler;
+import me.prodmarci.projectmagicrebirth.spellbook.spellbookHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,8 +13,11 @@ public final class main extends JavaPlugin implements Listener {
     soulsHandler soulsHandler;
     public HashMap<String, Integer> soulsCount = new HashMap<String, Integer>();
 
+    spellbookHandler spellbookHandler;
+
     public main() {
         soulsHandler = new soulsHandler(this);
+        spellbookHandler = new spellbookHandler(this);
     }
 
     // -> Souls count classes
@@ -35,5 +39,6 @@ public final class main extends JavaPlugin implements Listener {
     public void onEnable() {
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         Bukkit.getServer().getPluginManager().registerEvents(new soulsHandler(this), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new spellbookHandler(this), this);
     }
 }

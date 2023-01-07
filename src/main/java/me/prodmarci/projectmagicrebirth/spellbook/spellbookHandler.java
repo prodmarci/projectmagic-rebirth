@@ -31,20 +31,23 @@ public class spellbookHandler implements Listener {
         BookMeta bookMeta = event.getNewBookMeta();
 
         // Sets required spellbook name
-        String spellbookDisplayName = "Bound of Blood";
+        String spellbookDisplayName = "Bond of Blood";
 
-        // Checks if player's book is named the same as spellbookDisplayName variable and if the spellbook has loyalty enchantment
+        // Checks if player's book is named the same as spellbookDisplayName variable and if the spellbook has loyalty enchantment when opening
         if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().equals(spellbookDisplayName)
-            && player.getInventory().getItemInMainHand().containsEnchantment(Enchantment.LOYALTY)) {
+                && player.getInventory().getItemInMainHand().containsEnchantment(Enchantment.LOYALTY)) {
+
+            // Get spellbook content on 1'st page
             String spellbookContent = bookMeta.getPage(1);
 
+            // Depending on spellbookContent equip spells
             switch (spellbookContent) {
                 case "COF": {
-                    player.sendMessage("COF");
+                    player.sendMessage("COF equipped");
                     break;
                 }
                 case "ICEC": {
-                    player.sendMessage("ICEC");
+                    player.sendMessage("ICEC equipped");
                     break;
                 }
             }
