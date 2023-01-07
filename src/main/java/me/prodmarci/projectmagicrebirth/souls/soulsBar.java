@@ -95,10 +95,9 @@ public class soulsBar implements Listener {
 
     // Displays souls on exp bar and updates each 2 seconds
     @EventHandler
-    public void soulsDisplayAtXPBar(PlayerJoinEvent event) {
+    public void soulsDisplayAtExpBar(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         String playerUUID = player.getUniqueId().toString();
-        Integer playerSoulsCount = (int) soulsCount.get(playerUUID);
 
         // Create a timed runnable executing every 40 ticks
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(mainClass, new Runnable() {
@@ -108,12 +107,18 @@ public class soulsBar implements Listener {
                     // Converts int to percentage.
                     float barCompletion = (float) soulsCount.get(playerUUID) / 100;
                     // Display player soulsCount as XP Level
-                    player.setLevel((int) soulsCount.get(playerUUID));
+                    player.setLevel(soulsCount.get(playerUUID));
 
                     // Display player soulsCount as percentage on XP Bar
                     player.setExp(barCompletion);
                 }
             }
-        },0, 40);
+        },0, 20);
+    }
+
+    // Cancels exp drops from entity deaths
+    @EventHandler
+    public void EntityDeathEvent(EntityDeathEvent event) {
+        event.setDroppedExp(0);
     }
 }
