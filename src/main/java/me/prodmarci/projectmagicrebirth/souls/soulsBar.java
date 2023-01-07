@@ -91,14 +91,12 @@ public class soulsBar implements Listener {
         if(soulsCount.containsKey(playerUUID)) {
 
             // Create a timed runnable executing every 40 ticks
-            Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(mainClass, new Runnable() {
-                public void run() {
-                    // Display player soulsCount as XP Level
-                    player.setLevel(playerSoulsCount);
+            Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(mainClass, () -> {
+                // Display player soulsCount as XP Level
+                player.setLevel(playerSoulsCount);
 
-                    // Display player soulsCount on XP Bar
-                    player.setExp((float) playerSoulsCount / 100);
-                }
+                // Display player soulsCount on XP Bar
+                player.setExp((float) playerSoulsCount / 100);
             },0, 40);
         }
     }
