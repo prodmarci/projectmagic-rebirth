@@ -7,9 +7,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public final class main extends JavaPlugin implements Listener {
+
+    // All spellNames with costs, used in spell handling!
+    public List<String> spellNamesWithCost = Arrays.asList(
+            "TP", "10");
 
     soulsHandler soulsHandler;
     public HashMap<String, Integer> soulsCount = new HashMap<String, Integer>();
@@ -17,6 +23,7 @@ public final class main extends JavaPlugin implements Listener {
     spellbookHandler spellbookHandler;
     spellsHandler spellsHandler;
     public HashMap<String, String> spellSelected = new HashMap<String, String>();
+    public HashMap<String, String> spellEquipped = new HashMap<String, String>();
 
     public main() {
         soulsHandler = new soulsHandler(this);
@@ -48,7 +55,19 @@ public final class main extends JavaPlugin implements Listener {
 
     // Used when selected spell was used, removes player with certain UUID from HashMap
     public void deselectSpell(String UUID,String spellName) {
-        spellSelected.put(UUID, spellName);
+        spellSelected.remove(UUID, spellName);
+    }
+
+    // -> Spell handling
+
+    // Used with spell handling, after verifying spell selection
+    public void equipSpell(String UUID,String spellName) {
+        spellEquipped.put(UUID, spellName);
+    }
+
+    // Used with spell handling, after verifying spell selection
+    public void unequipSpell(String UUID,String spellName) {
+        spellEquipped.remove(UUID, spellName);
     }
 
     @Override

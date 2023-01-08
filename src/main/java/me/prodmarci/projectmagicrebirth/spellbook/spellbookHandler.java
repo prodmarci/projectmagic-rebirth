@@ -9,18 +9,23 @@ import org.bukkit.event.player.PlayerEditBookEvent;
 import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class spellbookHandler implements Listener {
     main mainClass;
     public HashMap<String, Integer> soulsCount;
     public HashMap<String, String> spellSelected;
+    public HashMap<String, String> spellEquipped;
+    public List<String> spellNamesWithCost;
 
     // Allows accessing variables from main class
     public spellbookHandler(main m) {
         this.mainClass = m;
         this.soulsCount = m.soulsCount;
         this.spellSelected = m.spellSelected;
+        this.spellEquipped = m.spellEquipped;
+        this.spellNamesWithCost = m.spellNamesWithCost;
     }
 
     // Checks book for spells written then equips them if player had enough mana
@@ -36,7 +41,7 @@ public class spellbookHandler implements Listener {
         String spellbookDisplayName = "Bond of Blood";
 
         // If spell is not chosen lets player choose spell
-        if (!spellSelected.containsKey(playerUUID)) {
+        if (!spellSelected.containsKey(playerUUID) && !spellEquipped.containsKey(playerUUID)) {
 
             // Checks if player's book is named the same as spellbookDisplayName variable and if the spellbook has loyalty enchantment when opening
             if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().equals(spellbookDisplayName)
@@ -45,30 +50,14 @@ public class spellbookHandler implements Listener {
                 // Get 1 st page spellbookContent
                 String spellbookContent = bookMeta.getPage(1);
 
-                // Depending on spellbookContent select certain spell
-                switch (spellbookContent) {
-                    case "TP": {
-                        // Spell name variable assign for code clarity
-                        String spellName = "TP";
+                // If the spell written exists, lets player select it
+                if (spellNamesWithCost.contains(spellbookContent)) {
 
-                        // Adds player with certain spell to spellSelected hashMap
-                        mainClass.selectSpell(playerUUID, spellName);
+                    // Selects spell for player
+                    mainClass.selectSpell(playerUUID, spellbookContent);
 
-                        // Debug log
-                        player.sendMessage("TP EQUIPPED");
-                        break;
-                    }
-                    case "ICE": {
-                        // Spell name variable assign for code clarity
-                        String spellName = "ICE";
-
-                        // Adds player with certain spell to spellSelected hashMap
-                        mainClass.selectSpell(playerUUID, spellName);
-
-                        // Debug log
-                        player.sendMessage("ICE EQUIPPED");
-                        break;
-                    }
+                    // Debug message
+                    player.sendMessage("EQUIPPED" + spellbookContent);
                 }
             }
         }
