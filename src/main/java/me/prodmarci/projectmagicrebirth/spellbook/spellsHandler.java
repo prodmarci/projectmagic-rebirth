@@ -56,7 +56,10 @@ public class spellsHandler implements Listener {
                         mainClass.deselectSpell(playerUUID, spellName);
 
                         // Debug message
-                        player.sendMessage("wow you can afford, spell equipped!");
+                        player.sendMessage("EQUIPPED " + spellName);
+                    } else {
+                        // Debug message
+                        player.sendMessage("OH NO!!! YOU DONT HAVE ENOUGH SOULS TO EQUIP " + spellName);
                     }
                 }
             }

@@ -57,7 +57,7 @@ public class spellbookHandler implements Listener {
                     mainClass.selectSpell(playerUUID, spellbookContent);
 
                     // Debug message
-                    player.sendMessage("EQUIPPED" + spellbookContent);
+                    player.sendMessage("SELECTED " + spellbookContent);
                 }
             }
         }
