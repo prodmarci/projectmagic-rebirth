@@ -53,6 +53,9 @@ public class spellbookHandler implements Listener {
 
                         // Adds player with certain spell to spellSelected hashMap
                         mainClass.selectSpell(playerUUID, spellName);
+
+                        // Debug log
+                        player.sendMessage("TP EQUIPPED");
                         break;
                     }
                     case "ICE": {
@@ -61,6 +64,9 @@ public class spellbookHandler implements Listener {
 
                         // Adds player with certain spell to spellSelected hashMap
                         mainClass.selectSpell(playerUUID, spellName);
+
+                        // Debug log
+                        player.sendMessage("ICE EQUIPPED");
                         break;
                     }
                 }
