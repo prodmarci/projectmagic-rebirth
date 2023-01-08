@@ -50,7 +50,6 @@ public class spellbookHandler implements Listener {
                     case "TP": {
                         // Spell name variable assign for code clarity
                         String spellName = "TP";
-                        player.getInventory().
 
                         // Adds player with certain spell to spellSelected hashMap
                         mainClass.selectSpell(playerUUID, spellName);
