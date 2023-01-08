@@ -45,13 +45,23 @@ public class spellbookHandler implements Listener {
                 // Get 1 st page spellbookContent
                 String spellbookContent = bookMeta.getPage(1);
 
+                // Depending on spellbookContent select certain spell
                 switch (spellbookContent) {
                     case "TP": {
-                        mainClass.selectSpell(playerUUID, "TP");
+                        // Spell name variable assign for code clarity
+                        String spellName = "TP";
+                        player.getInventory().
+
+                        // Adds player with certain spell to spellSelected hashMap
+                        mainClass.selectSpell(playerUUID, spellName);
                         break;
                     }
                     case "ICE": {
-                        mainClass.selectSpell(playerUUID, "ICE");
+                        // Spell name variable assign for code clarity
+                        String spellName = "ICE";
+
+                        // Adds player with certain spell to spellSelected hashMap
+                        mainClass.selectSpell(playerUUID, spellName);
                         break;
                     }
                 }

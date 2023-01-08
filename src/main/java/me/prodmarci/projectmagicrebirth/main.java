@@ -2,6 +2,7 @@ package me.prodmarci.projectmagicrebirth;
 
 import me.prodmarci.projectmagicrebirth.souls.soulsHandler;
 import me.prodmarci.projectmagicrebirth.spellbook.spellbookHandler;
+import me.prodmarci.projectmagicrebirth.spellbook.spellsHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,11 +15,13 @@ public final class main extends JavaPlugin implements Listener {
     public HashMap<String, Integer> soulsCount = new HashMap<String, Integer>();
 
     spellbookHandler spellbookHandler;
+    spellsHandler spellsHandler;
     public HashMap<String, String> spellSelected = new HashMap<String, String>();
 
     public main() {
         soulsHandler = new soulsHandler(this);
         spellbookHandler = new spellbookHandler(this);
+        spellsHandler = new spellsHandler(this);
     }
 
     // -> Souls count classes
@@ -36,7 +39,7 @@ public final class main extends JavaPlugin implements Listener {
         soulsCount.replace(UUID, soulsAmount);
     }
 
-    // -> Spellbook choose spell
+    // -> Spellbook choose spell and use spell
 
     // Used when selecting spell in spellbook, adds player with certain UUID to HashMap
     public void selectSpell(String UUID,String spellName) {
@@ -53,5 +56,6 @@ public final class main extends JavaPlugin implements Listener {
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         Bukkit.getServer().getPluginManager().registerEvents(new soulsHandler(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new spellbookHandler(this), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new spellsHandler(this), this);
     }
 }
