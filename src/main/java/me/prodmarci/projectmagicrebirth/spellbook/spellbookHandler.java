@@ -14,8 +14,7 @@ import java.util.Objects;
 public class spellbookHandler implements Listener {
     main mainClass;
     public HashMap<String, Integer> soulsCount;
-
-    public HashMap<String, String> spellSelected = new HashMap<String, String>();
+    public HashMap<String, String> spellSelected;
 
     // Allows accessing variables from main class
     public spellbookHandler(main m) {
@@ -47,12 +46,12 @@ public class spellbookHandler implements Listener {
                 String spellbookContent = bookMeta.getPage(1);
 
                 switch (spellbookContent) {
-                    case "COF": {
-                        // TODO: ADD CHOOSING SPELL HERE
+                    case "TP": {
+                        mainClass.selectSpell(playerUUID, "TP");
                         break;
                     }
-                    case "ICEC": {
-                        // TODO: ADD CHOOSING SPELL HERE v2
+                    case "ICE": {
+                        mainClass.selectSpell(playerUUID, "ICE");
                         break;
                     }
                 }

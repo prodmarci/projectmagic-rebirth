@@ -36,6 +36,18 @@ public final class main extends JavaPlugin implements Listener {
         soulsCount.replace(UUID, soulsAmount);
     }
 
+    // -> Spellbook choose spell
+
+    // Used when selecting spell in spellbook, adds player with certain UUID to HashMap
+    public void selectSpell(String UUID,String spellName) {
+        spellSelected.put(UUID, spellName);
+    }
+
+    // Used when selected spell was used, removes player with certain UUID from HashMap
+    public void deselectSpell(String UUID,String spellName) {
+        spellSelected.put(UUID, spellName);
+    }
+
     @Override
     public void onEnable() {
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
