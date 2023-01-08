@@ -57,7 +57,12 @@ public class spellsHandler implements Listener {
 
                         // Debug message
                         player.sendMessage("EQUIPPED " + spellName);
+
+                    // If player do not have enough souls deselects spell
                     } else {
+                        // Deselect spell because player already equipped it
+                        mainClass.deselectSpell(playerUUID, spellName);
+
                         // Debug message
                         player.sendMessage("OH NO!!! YOU DONT HAVE ENOUGH SOULS TO EQUIP " + spellName);
                     }
